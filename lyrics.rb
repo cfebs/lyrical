@@ -1,14 +1,14 @@
 require 'sinatra'
-require 'net/http'
-require 'uri'
+require 'open-uri'
+require 'nokogiri'
 
 get '/' do
   erb :index
 end
 
 get '/search/:query' do
-  # TODO nokogiri
-  uri = URI.parse("http://www.google.com/search?q=#{params[:query]}")
-  response = Net::HTTP.get_response(uri);
-  response.body
+  html = open("http://www.google.com/search?q=#{params[:query]}")
+  doc = Nokogiri.HTML(html)
+  doc.css('style, script, img, objecft, embed, iframe, canvas').remove
+  doc.css('#search')[0].to_s
 end
