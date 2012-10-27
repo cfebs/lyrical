@@ -2,10 +2,10 @@
 var Util = {
   notify: function(s, c) {
     var c= $.type(c) == 'undefined' ? c: 'info'
-    var n = $('#notice p:first')
+    var n = $('#notice p span:first')
     n.html(s);
     n.addClass(c);
-    n.show().wait(20).fadeOut();
+    n.fadeIn().delay(1000).fadeOut();
   }
 };
 
@@ -18,6 +18,7 @@ var _Google = function() {
   this.init = function() {
     this.container = $('<div id="scratch"></div>').appendTo('body');
     this.dump = $('<div id="dump" />').appendTo(this.container);
+    this.result = $('#result');
 
     //this.container.hide();
   }
@@ -27,7 +28,7 @@ var _Google = function() {
       url: '/search/' + this.buildQuery(str),
       dataType: 'html',
       success: function(data) {
-        this.dump.html(data);
+        this.result.html(data);
       }.bind(this)
     });
   }
@@ -48,7 +49,11 @@ var Google = new _Google();
 $(function(){
 
   var showMoney = function() {
-    Google.search($('#query').val());
+    var v = $('#query').val();
+    if (!v)
+      Util.notify('Please type something');
+    else
+      Google.search(v);
   }
 
   $('#query').keypress(function(e) {
