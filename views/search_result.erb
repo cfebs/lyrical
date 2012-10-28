@@ -1,0 +1,6 @@
+<div>
+<% @links.each do |link| %>
+  <% link = link[:youtube][0] %>
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/<%=link[:href]%>" frameborder="0" allowfullscreen></iframe>
+<% end %>
+</div>

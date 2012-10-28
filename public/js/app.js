@@ -26,9 +26,11 @@ var _Google = function() {
   this.search = function(str) {
     $.ajax({
       url: '/search/' + this.buildQuery(str),
-      dataType: 'html',
       success: function(data) {
         this.result.html(data);
+        //console.log(data);
+        //this.result.html(data);
+        //var links = $.parseJSON(data);
       }.bind(this)
     });
   }
