@@ -14,7 +14,7 @@ get '/search/:query' do
   youtube_links = []
   links.each do |link|
     uri = prepare_youtube_uri(link[:text])
-    link[:youtube] = get_youtube_links(uri)
+    link[:youtube] = get_youtube_links(uri)[0]
   end
   @links = links
   # {:links => links}.to_json
@@ -90,37 +90,10 @@ def get_google_links(uri)
   search.css('li.g h3 a').each do |link|
     text = clean_text(link.text)
     links << {
-      :score => 0,
       :href => link.attr('href'),
       :text => remove_lyrics(text).downcase.strip}
   end
 
-  # try to do stuff
-  # attempt at scoring, forgot about google already sorts by relevancy
-  # much better than I could, maybe useful for uniquing
-  ##counts = {}
-  ##links.each do |link|
-  ##  words = link[:text].split(/\W+/)
-  ##  words.each do |w|
-  ##    next if w.length < 4
-
-  ##    if counts[w]
-  ##      counts[w] += 1
-  ##    else
-  ##      counts[w] = 1
-  ##    end
-  ##  end
-  ##end
-
-  ##links.each do |link|
-  ##  counts.each do |word, count|
-  ##    if link[:text].include? word
-  ##      link[:score] += count
-  ##    end
-  ##  end
-  ##end
-
-  # only a few
   return links[0, 4]
 end
 
