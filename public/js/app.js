@@ -68,4 +68,13 @@ $(function(){
        if(e.which == 13) showMoney();
   });
   $('#go').click(showMoney);
+
+  $('#about').click(function() {
+    $('#dialog-modal').dialog({
+      modal: true,
+      draggable: false,
+      resizeable: false,
+      width: 800
+    });
+  });
 });

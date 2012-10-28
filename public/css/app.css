@@ -6,3 +6,7 @@
 pre, code {
   font-family: monospace;
 }
+
+#dialog-modal {
+  display: none;
+}

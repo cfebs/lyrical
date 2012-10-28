@@ -1,4 +1,5 @@
-<br>
+<a style="float: right" id="about" href="#about">About</a>
+
 <div class="row">
   <div id="notice" class="sixteen columns">
     <p style="height: 1em"><span></span></p>
@@ -6,8 +7,8 @@
 </div>
 
 <div class="row">
-<h1>Feed Me</h1>
-<p>Some song lyrics and I'll give you some youtube videos that probably match the song</p>
+  <h1>Feed Me</h1>
+  <p>Some song lyrics and I'll give you some youtube videos that probably match the song</p>
 </div>
 <div class="row">
   <div class="twelve columns alpha">
@@ -21,4 +22,10 @@
   <div style="text-align: center"><img id="spinner" src="img/spinner.gif" /></div>
   <div id="result" class="sixteen columns alpha omega">
   </div>
+</div>
+
+<div id="dialog-modal" title="About">
+  <p>
+  <%= RDiscount.new(File.open('./README.md', 'rb').read).to_html %>
+  </p>
 </div>
