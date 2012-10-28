@@ -14,16 +14,20 @@ var Util = {
 var _Google = function() {
   this.test = 'hello';
   this.container = null;
+  this.spinner = $('#spinner');
 
   this.init = function() {
     this.container = $('<div id="scratch"></div>').appendTo('body');
     this.dump = $('<div id="dump" />').appendTo(this.container);
     this.result = $('#result');
+    this.spinner.hide();
 
     //this.container.hide();
   }
 
   this.search = function(str) {
+    this.spinner.show();
+    this.result.hide();
     $.ajax({
       url: '/search/' + this.buildQuery(str),
       success: function(data) {
@@ -31,6 +35,8 @@ var _Google = function() {
         //console.log(data);
         //this.result.html(data);
         //var links = $.parseJSON(data);
+        this.result.show();
+        this.spinner.hide();
       }.bind(this)
     });
   }

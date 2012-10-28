@@ -3,8 +3,6 @@ require 'net/http'
 require 'uri'
 require 'open-uri'
 require 'nokogiri'
-require 'json'
-require 'pp'
 
 get '/' do
   erb :index
@@ -123,7 +121,7 @@ def get_google_links(uri)
   ##end
 
   # only a few
-  return links[0, 3]
+  return links[0, 4]
 end
 
 ##
