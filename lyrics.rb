@@ -14,10 +14,12 @@ get '/search/:query' do
   youtube_links = []
   links.each do |link|
     uri = prepare_youtube_uri(link[:text])
-    link[:youtube] = get_youtube_links(uri)[0]
+    youtube_link = get_youtube_links(uri)[0]
+    if link
+      youtube_links << youtube_link[:href]
+    end
   end
-  @links = links
-  # {:links => links}.to_json
+  @links = youtube_links.uniq
   erb :search_result, :layout => false
 end
 
