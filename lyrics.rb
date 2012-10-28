@@ -16,7 +16,6 @@ get '/search/:query' do
   youtube_links = []
   links.each do |link|
     uri = prepare_youtube_uri(link[:text])
-    puts uri
     link[:youtube] = get_youtube_links(uri)
   end
   @links = links
