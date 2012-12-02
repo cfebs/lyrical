@@ -90,7 +90,30 @@ class Google < LyricSite
   end
 end
 
+# Newer youtube results, uses the li data attributes to get the video ids
 class Youtube < LyricSite
+  def initialize
+    @query_uri = "http://www.youtube.com/results?search_query="
+  end
+
+  def parse_doc(doc)
+    search = doc.css('ol#search-results')[0]
+
+    return [] if !search
+
+    links = []
+    search.css('li.yt-lockup2-video').each do |link|
+      video_id = self.clean_text(link.attr('data-context-item-id'))
+      links << { :href => video_id }
+    end
+    puts links
+
+    return links
+  end
+end
+
+# No longer works
+class YoutubeOld < LyricSite
   def initialize
     @query_uri = "http://www.youtube.com/results?search_query="
   end
