@@ -104,9 +104,12 @@ class Youtube < LyricSite
     links = []
     search.css('li.yt-lockup2-video').each do |link|
       video_id = self.clean_text(link.attr('data-context-item-id'))
-      links << { :href => video_id }
+      title = self.clean_text(link.attr('data-context-item-title'))
+      links << {
+        :id => video_id,
+        :title => title
+      }
     end
-    puts links
 
     return links
   end

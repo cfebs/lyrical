@@ -10,3 +10,13 @@ pre, code {
 #dialog-modal {
   display: none;
 }
+
+.grid {
+  margin-left: 1em;
+  width: 420px;
+  float: left;
+}
+
+.title {
+  font-weight: bold;
+}
