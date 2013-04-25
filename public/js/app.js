@@ -12,7 +12,6 @@ var Util = {
 ////////////////////
 
 var _Google = function() {
-  this.test = 'hello';
   this.container = null;
   this.spinner = $('#spinner');
 

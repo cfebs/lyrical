@@ -16,12 +16,14 @@ get '/search/:query' do
   links.each do |link|
     link_text = link[:text]
     youtube_link = get_youtube_links(link_text)[0]
-    if link
+
+    if link and youtube_link
       video_id = youtube_link[:id]
       title = truncate_title(youtube_link[:title])
       youtube_links << video_id
       title_map[video_id] = title
     end
+
   end
 
   @links = []
