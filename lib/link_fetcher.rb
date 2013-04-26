@@ -1,49 +1,45 @@
-
 require './lib/lyric_site'
 
 class LinkFetcher
 
   def initialize query
     @query = query
-
   end
 
   def get_links
-    links = get_google_links(@query)
+    youtube_links = fetch_links
+    build_links youtube_links
+  end
+
+
+  #
+  def fetch_links
+    links = get_google_links
+    puts links
 
     youtube_links = []
-    title_map = {}
 
     links.each do |link|
       link_text = link[:text]
-      youtube_link = get_youtube_links(link_text)[0]
-
-      if link and youtube_link
-        video_id = youtube_link[:id]
-        title = truncate_title(youtube_link[:title])
-        youtube_links << video_id
-        title_map[video_id] = title
-      end
-
+      youtube_links << get_youtube_links(link_text)[0]
     end
 
-    links = []
-    youtube_links.uniq.each do |id|
-      links << { :id => id, :title => title_map[id] }
-    end
-
-    links
-
+    youtube_links
   end
 
 
-  def get_youtube_links(q)
-    Youtube.new.get_links(q)
+  # Unique map of links
+  def build_links links
+    links.uniq! { |link| link[:id] }
+  end
+
+  def get_youtube_links query
+    Youtube.new.get_links query
   end
 
   # Opens the google search page and gets the h3 links
-  def get_google_links(q)
-    Google.new.get_links(q)
+  def get_google_links
+    Google.new.get_links @query
   end
 
   def truncate_title(t, l=50)

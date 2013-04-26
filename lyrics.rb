@@ -13,4 +13,3 @@ get '/search/:query' do
 
 end
 
-

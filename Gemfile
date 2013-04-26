@@ -5,3 +5,7 @@ gem "nokogiri"
 gem "thin"
 gem "shotgun"
 gem "rdiscount"
+
+group :test do
+  gem "rspec"
+end
