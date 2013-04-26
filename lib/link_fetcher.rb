@@ -30,7 +30,11 @@ class LinkFetcher
 
   # Unique map of links
   def build_links links
-    links.uniq! { |link| link[:id] }
+    links.uniq { |link| link[:id] }.map do |link|
+      link[:title] = truncate_title(link[:title])
+    end
+
+    links
   end
 
   def get_youtube_links query
