@@ -30,7 +30,8 @@ class LinkFetcher
 
   # Unique map of links
   def build_links links
-    links.uniq { |link| link[:id] }.map do |link|
+    links.uniq! { |link| link[:id] }
+    links.each do |link|
       link[:title] = truncate_title(link[:title])
     end
 
@@ -46,9 +47,9 @@ class LinkFetcher
     Google.new.get_links @query
   end
 
-  def truncate_title(t, l=50)
+  def truncate_title(t, l=45)
     if t.length > l
-      t[0, 60] + ' ...'
+      t[0, l] + ' ...'
     else
       t
     end
