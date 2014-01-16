@@ -15,7 +15,6 @@ class LinkFetcher
   #
   def fetch_links
     links = get_google_links
-    puts links
 
     youtube_links = []
 

@@ -102,7 +102,7 @@ class Youtube < LyricSite
     return [] if !search
 
     links = []
-    search.css('li.yt-lockup2-video').each do |link|
+    search.css('li.yt-lockup-video').each do |link|
       video_id = self.clean_text(link.attr('data-context-item-id'))
       title = self.clean_text(link.attr('data-context-item-title'))
       links << {
